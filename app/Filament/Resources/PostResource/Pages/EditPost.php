@@ -4,6 +4,7 @@ namespace App\Filament\Resources\PostResource\Pages;
 
 use App\Concerns\HasPreview;
 use App\Filament\Resources\PostResource;
+use App\Models\Post;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Pboivin\FilamentPeek\Pages\Actions\PreviewAction;
@@ -41,6 +42,7 @@ class EditPost extends EditRecord
 
             Actions\Action::make('view')
                 ->label('View post')
+                ->hidden(fn(Post $record) => !$record->is_published)
                 ->url(fn ($record) => $record->url)
                 ->extraAttributes(['target' => '_blank']),
 
